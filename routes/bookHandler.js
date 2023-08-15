@@ -10,7 +10,7 @@ bookHandler.getBooks = function (request, response, next) {
     .catch(err => next (err))
 }
 
-bookHandler.createBooks = async function (req, res) {
+bookHandler.createBooks = async function (req, res, next) {
     const { title, description, status } = req.body
     const newBook = new BookClass(title, description, status)
     try {
@@ -20,7 +20,6 @@ bookHandler.createBooks = async function (req, res) {
             { upsert: true, new: true }
         )
         .catch((err) => console.log(err))
-        //console.log(doc)
         res.status(201).send(doc)
     } catch (err) {
         console.log('Error creating new book.')
