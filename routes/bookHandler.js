@@ -24,7 +24,7 @@ bookHandler.createBooks = async function (req, res) {
         res.status(201).send(doc)
     } catch (err) {
         console.log('Error creating new book.')
-        res.status(500).send('Error adding new Book.')
+        next(err)
     }
 }
 
