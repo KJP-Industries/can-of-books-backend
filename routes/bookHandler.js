@@ -1,7 +1,16 @@
+'use strict';
 const Book = require("../Model/book");
-const BookClass = require("../Model/BookClass")
+const BookClass = require("../Model/BookClass");
 
-async function createBooks(req, res, next) {
+const bookHandler = {}
+
+bookHandler.getBooks = function (request, response, next) {
+    Book.find({})
+    .then(data => response.status(200).send(data))
+    .catch(err => next (err))
+}
+
+bookHandler.createBooks = async function (req, res) {
     const { title, description, status } = req.body
     const newBook = new BookClass(title, description, status)
     try {
@@ -18,4 +27,5 @@ async function createBooks(req, res, next) {
         res.status(500).send('Error adding new Book.')
     }
 }
-module.exports = createBooks;
+
+module.exports = bookHandler;
