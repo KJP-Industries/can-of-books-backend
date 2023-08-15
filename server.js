@@ -1,6 +1,4 @@
 "use strict";
-//const getBooks = require("./routes/get-books");
-//const createBooks = require("./routes/create-books");
 const { getBooks, createBooks } = require('./routes/bookHandler')
 require("dotenv").config();
 const express = require("express");
