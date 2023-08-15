@@ -1,9 +1,9 @@
 "use strict";
-const getBooks = require("./routes/get-books");
-const createBooks = require("./routes/create-books");
+//const getBooks = require("./routes/get-books");
+//const createBooks = require("./routes/create-books");
+const { getBooks, createBooks } = require('./routes/bookHandler')
 require("dotenv").config();
 const express = require("express");
-const bodyParser = require('body-parser'); // added body-parser for handling form data
 const cors = require("cors");
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_CONNECT);
@@ -15,7 +15,7 @@ db.once("open", () => console.log("mongoose connected"));
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json()); // for parsing application/json form body data
+app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 
