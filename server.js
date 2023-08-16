@@ -1,5 +1,6 @@
 "use strict";
 const { getBooks, createBooks } = require("./routes/bookHandler");
+const deleteBook = require("./routes/delete-book");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -20,6 +21,7 @@ const PORT = process.env.PORT || 3001;
 app.get("/books", getBooks);
 
 app.post("/books", createBooks);
+app.delete("/books/:id", deleteBook);
 
 app.use((error, request, response, next) => {
   response.status(500).send(error.message);
