@@ -4,7 +4,10 @@ const Book = require("../Model/book");
 
 function deleteBook(request, response, next) {
   const { id } = request.params;
-  response.status(204).send();
+
+  Book.findByIdAndDelete(id)
+    .then((data) => response.status(204).send())
+    .catch((error) => next(error));
 }
 
 module.exports = deleteBook;
