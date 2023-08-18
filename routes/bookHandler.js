@@ -1,7 +1,7 @@
 'use strict';
 
-const Book = require("../Model/book");
-const BookClass = require("../Model/BookClass");
+const Book = require('../Model/book');
+const BookClass = require('../Model/BookClass');
 
 const bookHandler = {};
 
@@ -20,6 +20,14 @@ bookHandler.createBook = async function (req, res, next) {
     { upsert: true, new: true }
   )
     .then((doc) => res.status(201).send(doc))
+    .catch((err) => next(err));
+};
+
+bookHandler.updateBook = async function (request, response, next) {
+  const { id } = request.params;
+
+  Book.findByIdAndUpdate(id, request.body, { returnDocument: 'after' })
+    .then((data) => response.status(200).send(data))
     .catch((err) => next(err));
 };
 
