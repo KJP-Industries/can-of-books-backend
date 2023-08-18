@@ -1,6 +1,11 @@
 "use strict";
 
-const { getBooks, createBook, deleteBook } = require("./routes/bookHandler");
+const {
+  getBooks,
+  createBook,
+  updateBook,
+  deleteBook,
+} = require("./routes/bookHandler");
 const PORT = process.env.PORT || 3001;
 
 const express = require("express");
@@ -20,6 +25,7 @@ db.once("open", () => console.log("Mongoose connected!"));
 
 app.get("/books", getBooks);
 app.post("/books", createBook);
+app.put("/books/:id", updateBook);
 app.delete("/books/:id", deleteBook);
 
 app.get("*", (req, res, next) =>
